@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>LoginRadius Profile</title>
+       
+        
+         <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+ <script src="js/ng-cordova.min.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+ 
+<script src="js/lrsdkservices.js"></script>
+<script src="js/lrapiservices.js"></script>
+    </head>
+   <body ng-app="starter">
+    <ion-header-bar class="bar-positive" align-title="center">
+    
+  <h1 class="title">LoginRadius</h1>
+  
+   </ion-header-bar>
+    <ion-content ng-controller="ExampleController" padding="true" ng-init="loadUserprofile()">
+    
+  
+   
+     
+        <div class="sociallogin_userprofile" id="sociallogin_userprofile" style="margin-top: 10px;">
+
+            <table style="width:100%">
+                <tr>
+                    <td class="userprofile_label" colspan="2"><img id="userimage" height="100px;" alt="profile_image" />
+                        <span style="text-align:right;float:right;vertical-align: top;border: 0;">
+                          
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="userprofile_label">ID</td>
+                    <td id="ID" class="userprofile_value"></td>
+                </tr>
+                <tr>
+                    <td class="userprofile_label">Provider</td>
+                    <td id="Provider" class="userprofile_value"></td>
+                </tr>
+                <tr>
+                    <td class="userprofile_label">Name</td>
+                    <td id="username" class="userprofile_value"></td>
+                </tr>
+
+                <tr>
+                    <td class="userprofile_label">EmailID</td>
+                    <td id="emailid" class="userprofile_value"></td>
+                </tr>
+                <tr>
+                    <td class="userprofile_label">Birth Date</td>
+                    <td id="birthdate" class="userprofile_value"></td>
+                </tr>
+                <tr>
+                    <td class="userprofile_label">Gender</td>
+                    <td id="gender" class="userprofile_value"></td>
+                </tr>
+                <tr>
+                    <td class="userprofile_label">Profile Url</td>
+                    <td id="profileurl" class="userprofile_value"></td>
+                </tr>
+            </table>
+        </div>
+ 
+   
+       
+       <div class="col text-center">
+         <button class="button button-assertive"  ng-click ="Logout()">
+ Logout
+</button>
+
+</div>
+    </ion-content>
+
+       
+
+       
+       
+    </body>
+</html>
