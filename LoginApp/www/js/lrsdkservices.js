@@ -5,7 +5,14 @@ angular.module('starter')
 	var HostedDomain = "https://cdn.loginradius.com/hub/prod/Theme/mobile-v2/index.html";
 	var params = {};  // params use for storing values like token,action and uid
 	var options;     // get all lroptions values and set in options
-		
+		var inapp;
+	
+    if(localStorage.getItem("clearcache")!=null){
+	 inapp=localStorage.getItem("clearcache");
+	 localStorage.removeItem("clearcache");
+    }else{
+    inapp='location=no';
+    }
 		
 	 //login,register,social, forgotpassword fun for creating hosted page url .		
 
@@ -62,7 +69,13 @@ this.getSDKContext = function(lroptions){
   	
      lrlogin(url,CallbackFun);  
 
-    }
+    }, sdkLogout : function(){
+	
+	     window.location = "index.html";
+		 var inapp='location=no,clearcache=yes,toolbar=no,clearsessioncache=yes';
+         localStorage.setItem("clearcache", inapp);
+         facebookConnectPlugin.logout();
+	}	
   }	
 }
 
@@ -71,7 +84,7 @@ this.getSDKContext = function(lroptions){
 var lrlogin= function (url,callback) {
 	  
 	   if (!url)return false;
-		win =window.open(url, '_blank', options.inappbrowserlocation);
+		win =window.open(url, '_blank', inapp);
 		win.addEventListener('loadstop',function(event){
 		
 		

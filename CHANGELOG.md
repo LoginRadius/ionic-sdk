@@ -3,6 +3,20 @@
 ### Version 1.0.0
 Released on **july 20,  2016**
 
-- Implemented LoginRadius features, includes social login and user registration.
-- Implemented Facebook native login.
-- Implemented all social login and user registration APIs.
+   - Implemented LoginRadius features, includes Social Login and User Registration.
+   - Implemented Facebook Native Login.
+   - Implemented all user registration and social APIs.
+
+
+
+### Version 1.1.0
+Released on **december 23,  2016**
+
+##### Enhancements
+
+   - Significantly improved code performance.
+  
+##### Bug Fixes
+   
+   - Added Feature to clear cache for loggedIn user click on Logout Button.
+  
