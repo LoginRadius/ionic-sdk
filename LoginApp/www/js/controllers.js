@@ -41,9 +41,13 @@ angular.module('starter')
 	             break;
 	             //Forgot password returns and email message and status which you can use to display messaging to your user.
 	         case "forgotpassword":
-	             var forgotmessage = "An email has been sent to " + params.email + ". Click on the forgot password link included in this email.";
+	             var forgotmessage = "An email has been sent to " + params.email + ". Click on the reset Password link included in this email.";
 	             //$(".messageinfo").html(forgotmessage);
 	             alert(forgotmessage);
+	             break;
+			case "emailnotverfied":
+	             var emailnotver = "Email Verification message send successfully.Please verify your account.";
+	              alert(emailnotver);
 	             break;
 	         default:
 

@@ -159,6 +159,11 @@ var lrlogin= function (url,callback) {
 							
 								break;
 								
+							case 'emailnotverfied':
+								params.action = action;
+						
+         						break;
+								
 							default:
 							
 								break;
