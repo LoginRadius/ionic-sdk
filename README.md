@@ -13,16 +13,16 @@ Please visit [here](http://www.loginradius.com/) for more information.
 ######Before using demo project,you must install Ionic environment in your system Please visit [here](http://ionicframework.com/docs/guide/installation.html) for complete Ionic installation.
 
 #### There are two projects in the library:
-a. LoginApp - This is the demo application.    
+a. LoginApp-Demo - This is the demo application.    
 b. IonicSDK -This is the LoginRadius SDK
 
-##### LoginApp
+##### LoginApp-Demo
 1.Put the value according to your requirement in controllers.js 
 ```JavaScript
 lroptions.apikey = '<LoginRadius API Key>';
 lroptions.siteName = '<LoginRadius Site Name>';
-lroptions.promptPasswordOnSocialLogin = true;
-lroptions.V2RecaptchaSiteKey = "<Recaptcha Key>";
+lroptions.promptPasswordOnSocialLogin = 'true';
+lroptions.V2RecaptchaSiteKey = "";
 ```
 
 2.Finally, setup elements to trigger the functions that will direct your users to the relevant hosted interface.

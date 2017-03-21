@@ -9,7 +9,10 @@ angular.module('starter')
      lroptions.siteName = '<LoginRadius Site Name>';
      lroptions.promptPasswordOnSocialLogin = 'false';
 	 lroptions.V2RecaptchaSiteKey = "";
-	 lroptions.native = false;
+	 lroptions.facebooknative = false;
+	 lroptions.googlenative = false;
+	 lroptions.nativepath="Profile.html";
+     lroptions.googlewebid="";  // if you set google native login then you must be add your webClientId
 	 lroptions.nativepath="Profile.html";
 
 
