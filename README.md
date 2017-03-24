@@ -17,28 +17,22 @@ a. LoginApp-Demo - This is the demo application.
 b. IonicSDK -This is the LoginRadius SDK
 
 ##### LoginApp-Demo
-1.Put the value according to your requirement in controllers.js 
+1.Put the value according to your requirement in index.html
 ```JavaScript
-lroptions.apikey = '<LoginRadius API Key>';
-lroptions.siteName = '<LoginRadius Site Name>';
-lroptions.promptPasswordOnSocialLogin = 'true';
-lroptions.V2RecaptchaSiteKey = "";
+  commonOptions.apiKey = "<your loginradius api key>";
+  commonOptions.appName = "<LoginRadius site name>";
 ```
 
 2.Finally, setup elements to trigger the functions that will direct your users to the relevant hosted interface.
 ```html
-<div class="col text-center">
-    <button class="button button-outline button-positive" ng-click="lr.login()">
-    Login
-    </button>
-    <button class="button button-outline button-positive" ng-click="lr.register()">
-    Register
-    </button>
-    <button class="button button-outline button-positive" ng-click="lr.social()">
-    SocialLogin
-    </button>
-    <button class="button button-outline button-positive" ng-click="lr.forgotpassword()">
-    ForgotPassword
-    </button>
-    </div>
+ <div class="col text-center">
+     <a class="button button-outline button-positive" href="#/login">Login</a>
+
+     <a  class="button button-outline button-positive" href="#/register">Register</a>
+
+     <a  class="button button-outline button-positive" href="#/sociallogin">Social Login</a>
+
+     <a  class="button button-outline button-positive" href="#/forgotpassword">Forgot Password</a>
+
+ </div>
 ```

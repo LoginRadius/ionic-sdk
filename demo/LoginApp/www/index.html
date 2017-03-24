@@ -1,0 +1,339 @@
+
+
+
+
+<!DOCTYPE html>
+<html ng-app="starter">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width" />
+  <title>LoginRadius Demo</title>
+ 
+      <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    
+     <link rel="stylesheet" href="css/lr_raas.css">
+   
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+ <script src="lib/ionic/js/ionic.bundle.js"></script>
+ <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+ <script src="js/ng-cordova.min.js"></script>
+ <script src="js/app.js"></script>
+ <script src="js/controllers.js"></script>
+ <script src="js/sdkservices.js"></script>
+ <script src="https://auth.lrcontent.com/v2/LoginRadiusV2.js"></script>
+
+
+<script type="text/javascript">
+        var commonOptions = {};
+        commonOptions.apiKey = "<your loginradius api key>";
+        commonOptions.appName = "<LoginRadius site name>";
+        commonOptions.hashTemplate = true;
+        commonOptions.accessTokenResponse = true;
+        commonOptions.phoneLogin = false;
+        commonOptions.sott ="<Get_Sott>";
+        commonOptions.verificationUrl = "https://auth.lrcontent.com/mobile/verification/index.html";
+        commonOptions.callbackUrl = 'LoginRadiusIonicSdk.2.0.0/login';
+        commonOptions.isMobile = true;
+        commonOptions.formValidationMessage = true;
+        var LRObject = new LoginRadiusV2(commonOptions);
+
+</script>
+</head>
+
+<body>
+  <div ng-app="starter" ng-controller="ExampleController" id="loginradius-ionic">
+  
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+  </div>
+  <script id="home.html" type="text/ng-template">
+    <ion-view>
+      <ion-header-bar class="bar-positive" align-title="center">
+          <h1 class="title">LoginRadius</h1>
+      </ion-header-bar>    
+      <ion-content has-header="true" padding="true">
+
+
+
+       <div class="col text-center">
+     
+                 <a class="button button-outline button-positive" href="#/login">Login</a>
+
+                 <a  class="button button-outline button-positive" href="#/register">Register</a>
+
+                 <a  class="button button-outline button-positive" href="#/sociallogin">Social Login</a>
+
+                 <a  class="button button-outline button-positive" href="#/forgotpassword">Forgot Password</a>
+
+         </div>
+      </ion-content>
+
+      <div class="bar bar-footer bar-light">
+   <h1 class="title" style="font-size: 10px;">Copyright © 2017 LoginRadius Inc.</h1>
+</div>
+    </ion-view>
+  </script>
+  <script id="login.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">Login</h1>
+ 
+</ion-header-bar>      
+      <ion-content has-header="true" padding="true" ng-init="lr.login()">
+
+      <div>
+    <div id="attid" style="display:none;text-align: center;margin-bottom: 20px;">Fill all field to complete the registration process</div>
+    <div id="sociallogin-container" class="interfacecontainerdiv" style="text-align: center;margin-bottom: 4%;"></div>
+     <div id="line">
+                    <h2><span>or</span></h2>
+                </div>
+<div id="login-container" style="margin-bottom: 5%;"></div>
+
+                <script type="text/html" id="loginradiuscustom_tmpl">
+                    <a class="lr-sl-shaded-brick-button lr-flat-<#=Name.toLowerCase()#>" href="javascript:void(0)" onclick="socialLogin('<#= Endpoint #>');" title="<#= Name #>">
+<span class="lr-sl-icon lr-sl-icon-<#=Name.toLowerCase()#>"></span></span>
+Login With <#=Name#>
+
+</a>
+                </script>
+
+  
+               
+           </div>
+
+      </ion-content>
+    </ion-view>
+  </script>  
+    <script id="register.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">Register</h1>
+ 
+</ion-header-bar>      
+      <ion-content has-header="true" padding="true" ng-init="lr.register()">
+       <div id="registration-container"  style="margin-bottom:4%"></div>
+      </ion-content>
+    </ion-view>
+  </script>  
+   <script id="sociallogin.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">Social Login</h1>
+ 
+</ion-header-bar>      
+      <ion-content has-header="true" padding="true" ng-init="lr.social()">
+        <div id="sociallogin-main-container" class="interfacecontainerdiv" style="text-align: center;"></div>
+
+
+                <script type="text/html" id="loginradiuscustom_tmpl">
+
+
+                    <a class="lr-sl-shaded-brick-button lr-flat-<#=Name.toLowerCase()#>" href="javascript:void(0)" onclick="socialLogin('<#= Endpoint #>');" title="<#= Name #>">
+<span class="lr-sl-icon lr-sl-icon-<#=Name.toLowerCase()#>"></span></span>
+Login With <#=Name#>
+
+</a>
+                </script>
+
+            </div>
+      </ion-content>
+    </ion-view>
+  </script>  
+
+   <script id="forgotpassword.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">Forgot Password</h1>
+ 
+</ion-header-bar>      
+      <ion-content  has-header="true" padding="true" ng-init="lr.forgotpassword()">
+         <div data-role="main" class="ui-content">
+                <div id="forgotpassword-container"></div>
+ </div> 
+ </ion-content>
+    </ion-view>
+  </script>  
+
+   <script id="afterloginredirection.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">After Login Redirection</h1>
+ 
+</ion-header-bar>      
+      <ion-content  has-header="true" padding="true">
+      <div class="col text-center">
+
+                 <a class="button  button-positive" href="Profile.html">Profile</a>
+
+                 <a  class="button  button-positive" href="#/accountlinking">AccountLinking</a>
+
+                 <a  class="button  button-positive" href="#/updateprofile">Profile Update</a>
+
+                 <a  class="button  button-positive" href="#/changepassword">Change Password</a>
+
+                 <a class="button  button-positive" href="#/updatephone">Update Phone</a>
+
+                 <a  class="button  button-positive" href="#/addemail">Add Email</a>
+
+                 <a  class="button  button-positive" href="#/removeemail">Remove Email</a>
+
+                 <a  class="button  button-positive" href="#/changeusername">Change username</a>
+                 </div>
+
+ </ion-content>
+    </ion-view>
+  </script> 
+
+   <script id="accountlinking.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">Account Linking</h1>
+ 
+</ion-header-bar>      
+      <ion-content  has-header="true" padding="true" ng-init="lr.accountLink()">
+         <div id="interfacecontainerdiv_link" class="interfacecontainerdiv_link"></div>
+                <script type="text/html" id="loginradiuscustom_tmpl_link">
+                    <# if(isLinked) { #>
+                        <div class="lr-linked">
+                            <a class="lr-sl-shaded-brick-button lr-flat-<#=Name.toLowerCase()#>" href="javascript:void(0)" onclick='return  <#=ObjectName#>.util.unLinkAccount(\"<#= Name.toLowerCase() #>\",\"<#= providerId #>\")' title="<#= Name #>" alt="Connected">
+<span class="lr-sl-icon lr-sl-icon-<#=Name.toLowerCase()#>"></span></span>
+<#=Name#> is connected | Unlink <#=Name#> 
+</a>
+
+                        </div>
+                        <# } else {#>
+                            <div class="lr-unlinked">
+
+                                <a class="lr-sl-shaded-brick-button lr-flat-<#=Name.toLowerCase()#>" href="javascript:void(0)" onclick="return  <#=ObjectName#>.util.openWindow('<#= Endpoint #>');" title="<#= Name #>">
+<span class="lr-sl-icon lr-sl-icon-<#=Name.toLowerCase()#>"></span></span>
+Link With <#=Name#>
+
+</a>
+
+                            </div>
+                            <# } #>
+                </script>
+
+
+
+            </div>
+ </ion-content>
+    </ion-view>
+  </script>   
+   <script id="updateprofile.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">Update Profile</h1>
+ 
+</ion-header-bar>      
+      <ion-content  has-header="true" padding="true" ng-init="lr.profileUpdate()">
+          <div id="profileeditor-container"></div>
+ </ion-content>
+    </ion-view>
+  </script>  
+   </script>   
+   <script id="changepassword.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">Change Password</h1>
+ 
+</ion-header-bar>      
+      <ion-content  has-header="true" padding="true" ng-init="lr.changePassword()">
+          <div id="changepassword-container"></div>
+    </ion-view>
+  </script>  
+
+  <script id="updatephone.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">Update Phone</h1>
+ 
+</ion-header-bar>      
+      <ion-content  has-header="true" padding="true" ng-init="lr.updatePhone()">
+        <div id="updatephone-container"></div>
+    </ion-view>
+  </script>  
+  <script id="changeusername.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">Change Username</h1>
+ 
+</ion-header-bar>      
+      <ion-content  has-header="true" padding="true" ng-init="lr.changeUsername()">
+        <div id="changeusername-container"></div>
+    </ion-view>
+  </script>  
+
+   <script id="addemail.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">Add Email</h1>
+ 
+</ion-header-bar>      
+      <ion-content  has-header="true" padding="true" ng-init="lr.addEmail()">
+        <div id="addemail-container"></div>
+    </ion-view>
+  </script>  
+   <script id="removeemail.html" type="text/ng-template">
+    <ion-view>
+     <ion-header-bar align-title="center" class="bar-positive">
+  <div class="buttons">
+     <div id="div" class="fa fa-chevron-left" ng-click="onBackKeyDown()" style="font-size:25px;color:#fff;margin: 5px;"></div>
+  </div>
+  <h1 class="title">Remove Email</h1>
+ 
+</ion-header-bar>      
+      <ion-content  has-header="true" padding="true" ng-init="lr.removeEmail()">
+      <div id="removeemail-container"></div>
+    </ion-view>
+  </script> 
+
+<script type="text/javascript">
+        function socialLogin(url) {
+           angular.element(document.getElementById('loginradius-ionic')).scope().lr.ionicLogin(url);
+        }
+    </script>
+</body>
+
+</html>
+S
