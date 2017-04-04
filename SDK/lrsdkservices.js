@@ -9,9 +9,9 @@ angular.module('starter')
         if (localStorage.getItem("clearcache") != null) {
             inapp = localStorage.getItem("clearcache");
             localStorage.removeItem("clearcache");
-        } else {
-            inapp = 'location=no';
-        }
+        }else {
+			 inapp = 'location=no';
+		}
 
         //login,register,social, forgotpassword fun for creating hosted page url .
 
@@ -113,10 +113,12 @@ angular.module('starter')
                 if (providers == "facebook" && options.facebooknative) {
 
 
-                    $LR.login(); //LR.login function use for native login
+                 win.close();
+                 setTimeout(function(){$LR.login();},1000);//LR.login function use for native login
 
                 } else if (providers == "google" && options.googlenative) {
-                    $LR.login(); //LR.login function use for native login
+                    win.close();
+                    setTimeout(function(){$LR.login();},1000); //LR.login function use for native login
 
                 } else {
 
@@ -202,7 +204,7 @@ angular.module('starter')
             },
 
             login: function() {
-                var ref = cordova.InAppBrowser.open('http://', '_blank', 'location=no'); //open new  inappbrowser window for native login background
+               
                 var nativefbprovider = sessionStorage.getItem("providername");
 
                 if (options.facebooknative && nativefbprovider == "facebook") {
@@ -337,7 +339,7 @@ angular.module('starter')
                     var actionfb = ("sociallogin");
                     var lrfbtoken = sessionStorage.getItem("LRTokenKey");
                     sessionStorage.removeItem("providername");
-                    win.close();
+                   
                     window.location = options.nativepath;
 
                 },

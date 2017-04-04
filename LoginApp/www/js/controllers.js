@@ -13,7 +13,7 @@ angular.module('starter')
 	 lroptions.googlenative = false;
 	 lroptions.nativepath="Profile.html";
      lroptions.googlewebid="";  // if you set google native login then you must be add your webClientId
-	 lroptions.nativepath="Profile.html";
+	
 
 
 	 $scope.lr = SDKService.getSDKContext(lroptions);
