@@ -1,7 +1,7 @@
 angular.module('starter')
 .service("SDKService", function() {
         var win; // variable for inappbrowser
-        var HostedDomain = "https://cdn.loginradius.com/hub/prod/Theme/mobile-v2/index.html";
+        var HostedDomain = "https://cdn.loginradius.com/hub/prod/Theme/mobile-v3/index.html";
         var params = {}; // params use for storing values like token,action and uid
         var options; // get all lroptions values and set in options
         var inapp;
@@ -9,14 +9,16 @@ angular.module('starter')
         if (localStorage.getItem("clearcache") != null) {
             inapp = localStorage.getItem("clearcache");
             localStorage.removeItem("clearcache");
-        }else {
-			 inapp = 'location=no';
-		}
+        }else{
+          inapp='location=no';
+        }
 
         //login,register,social, forgotpassword fun for creating hosted page url .
 
         this.getSDKContext = function(lroptions) {
             options = lroptions;
+             if(lroptions.inappbrowserlocation!=null &&lroptions.inappbrowserlocation=='location=yes'){
+             inapp='location=yes'; }
             return {
                 login: function() {
 
@@ -71,58 +73,45 @@ angular.module('starter')
                 },
                 sdkLogout: function() {
 
-                    window.location = "index.html";
-                    var inapp = 'location=no,clearcache=yes,toolbar=no,clearsessioncache=yes';
-                    localStorage.setItem("clearcache", inapp);
-                    facebookConnectPlugin.logout();
+                     window.location = "index.html";
+                     var inapp = 'location=no,clearcache=yes,toolbar=no,clearsessioncache=yes';
+                     localStorage.setItem("clearcache", inapp);
+
                 }
             }
         }
-
 
         //lrlogin fun for open hosted page url in inappbrowser
         var lrlogin = function(url, callback) {
 
             if (!url) return false;
-            win = window.open(url, '_blank', inapp);
+         win = window.open(url, '_blank', inapp,true);
+         win.addEventListener('loadstart', function(event) {
+			   var getParamValue = function(param) {
+                           var regex = new RegExp("[\\?&]" + param + "=([^&#]*)"),
+                               results = regex.exec(event.url);
+                           return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+                       };
+              var provider = getParamValue("provider");
+          if(options.googlenative && provider=="google"){
+						win.close();
+						setTimeout(function(){$LR.login(provider);},1000);
+		 }else if(options.facebooknative && provider=="facebook"){
+				  win.close();
+                  setTimeout(function(){$LR.login(provider);},1000);//LR.login function use for native login
+		}else if(options.googlenative && event.url.indexOf("accounts.google.com")!=-1){
+           win.close();
+           setTimeout(function(){$LR.login("google");},1000);
+          }
+			});
             win.addEventListener('loadstop', function(event) {
-
-
-                var getParamValue = function(param) {
+            	 var getParamValue = function(param) {
                     var regex = new RegExp("[\\?&]" + param + "=([^&#]*)"),
                         results = regex.exec(event.url);
                     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
                 };
 
-
-                var provider = getParamValue("provider");
-                if (provider != null) {
-                    switch (provider) {
-                        case "facebook":
-                            sessionStorage.setItem("providername", "facebook");
-                            break;
-                        case "google":
-                            sessionStorage.setItem("providername", "google");
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-                var providers = sessionStorage.getItem("providername");
-                if (providers == "facebook" && options.facebooknative) {
-
-
-                 win.close();
-                 setTimeout(function(){$LR.login();},1000);//LR.login function use for native login
-
-                } else if (providers == "google" && options.googlenative) {
-                    win.close();
-                    setTimeout(function(){$LR.login();},1000); //LR.login function use for native login
-
-                } else {
-
-                    var redirect = getParamValue("redirect");
+                     var redirect = getParamValue("redirect");
                     if (redirect != "") {
                         var action = getParamValue("action");
                         if (action != "") {
@@ -169,14 +158,13 @@ angular.module('starter')
                                     break;
 
                                 default:
-
-                                    break;
+                                break;
                             }
                         }
                         win.close();
                     };
 
-                }
+
 
             });
             win.addEventListener('exit', function(event) {
@@ -203,20 +191,17 @@ angular.module('starter')
                 'GOOGLE': '/api/v2/access_token/googlejwt?key={API_KEY}&id_token={ACCESS_TOKEN}'
             },
 
-            login: function() {
-               
-                var nativefbprovider = sessionStorage.getItem("providername");
-
-                if (options.facebooknative && nativefbprovider == "facebook") {
+            login: function(provider) {
+                 if (provider == "facebook") {
                     try {
                         facebookConnectPlugin.login($LR.options.permissions,
                             this.util.nativeCallbackFacebookSuccess,
                             this.util.nativeCallbackFacebookFail);
                     } catch (e) {
                         alert(e);
-                        sessionStorage.removeItem("providername");
+
                     }
-                } else if (options.googlenative && nativefbprovider == "google") {
+                } else if (provider == "google") {
                     var webClientId = "";
 
                     if (options.googlewebid != null || options.googlewebid != "") {
@@ -232,8 +217,10 @@ angular.module('starter')
 
                         },
                         function(msg) {
-                            alert('error: ' + msg);
-                            sessionStorage.removeItem("providername");
+                            alert('Goggle error: ' + msg);
+
+
+
                         });
                 } else {
 
@@ -339,7 +326,7 @@ angular.module('starter')
                     var actionfb = ("sociallogin");
                     var lrfbtoken = sessionStorage.getItem("LRTokenKey");
                     sessionStorage.removeItem("providername");
-                   
+
                     window.location = options.nativepath;
 
                 },
@@ -351,12 +338,6 @@ angular.module('starter')
                 nativeLogoutFacebookFailure: function(response) {
 
                 }
-
-
-            }
-
-        };
-
-
-
-    });
+     }
+  };
+ });
