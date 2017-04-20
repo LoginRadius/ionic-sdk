@@ -1,11 +1,19 @@
 > **LoginRadius Ionic SDK Change Log** provides information regarding what has changed, more specifically what changes, improvements and bug fix has been made to the SDK. For more details please refer to the [LoginRadius API Documention](http://apidocs.loginradius.com/docs/ionic)
 
+
+### Version 1.3.0
+Released on **April 19, 2017**
+
+##### Enhancements
+
+  - Implemented Safari View Controller 
+  
 ### Version 1.2.2
 Released on **April 10,  2017**
 
 ##### Bug Fixes
 
-  - Fixed google native login issue for some android devices.
+  - Fixed ios google native login issue in android(some devices).
 
 
 ### Version 1.2.1

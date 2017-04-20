@@ -12,6 +12,7 @@
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
 
+
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
@@ -23,8 +24,18 @@
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
-<script src="js/lrsdkservices.js"></script>
-<script src="js/lrapiservices.js"></script>
+	<script src="js/lrsdkservices.js"></script>
+	<script src="js/lrapiservices.js"></script>
+
+<script>
+	function handleOpenURL(url){
+	 setTimeout(function() {
+		 angular.element(document.getElementById('exampleController')).scope().lr.listen(url);
+	 }, 0);
+	};
+					  
+</script>
+
   </head>
  <body ng-app="starter">
     <ion-header-bar class="bar-positive" align-title="center">
@@ -34,10 +45,9 @@
   
     
     </ion-header-bar>
-    <ion-content ng-controller="ExampleController" padding="true">
+    <ion-content id="exampleController" ng-controller="ExampleController" padding="true">
   
    <div class="col text-center">
-  
         <button class="button button-outline button-positive" ng-click="lr.login()">
             Login
         </button>

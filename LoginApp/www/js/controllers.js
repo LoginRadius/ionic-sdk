@@ -5,24 +5,23 @@ angular.module('starter')
 
 	 var lroptions = {};
 
-	 lroptions.apikey = '<LoginRadius API Key>';
+	 lroptions.apikey = '<LoginRadius ApiKey>';
      lroptions.siteName = '<LoginRadius Site Name>';
      lroptions.promptPasswordOnSocialLogin = 'false';
 	 lroptions.V2RecaptchaSiteKey = "";
 	 lroptions.facebooknative = false;
 	 lroptions.googlenative = false;
 	 lroptions.nativepath="Profile.html";
-     lroptions.googlewebid="";  // if you set google native login then you must be add your webClientId
-	
-
+     lroptions.googlewebid="<your Google Weub ID";  // if you set google native login then you must be add your webClientId
+		
 
 	 $scope.lr = SDKService.getSDKContext(lroptions);
 	 $scope.lrapi = APIService.getAPIContext();
-
-
+	
+	
 
 	 lroptions.callback = function(params) {
-
+		
 	     //Handle the actions for: sociallogin, login, registration, and forgotpassword
 	     switch (params.action) {
 	         //Social login returns an accesstoken which can be used to pull user details including ID and UID for server side calls.
@@ -61,8 +60,11 @@ angular.module('starter')
 
 
 	 $scope.Logout = function() {
-      window.location = "index.html";
+      
+		
        $scope.lr.sdkLogout();
+	   window.location = "index.html";
+	   
 	 }
 
 
