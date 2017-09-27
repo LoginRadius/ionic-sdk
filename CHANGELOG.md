@@ -1,6 +1,14 @@
 > **LoginRadius Ionic SDK Change Log** provides information regarding what has changed, more specifically what changes, improvements and bug fix has been made to the SDK. For more details please refer to the [LoginRadius API Documention](http://apidocs.loginradius.com/docs/ionic)
 
 
+### Version 1.3.1
+Released on **September 27,  2017**
+
+##### Bug Fixes
+
+  - update demo compatible with ios 11
+  - fixed build time issue in Xcode-9
+
 ### Version 1.3.0
 Released on **April 19, 2017**
 
