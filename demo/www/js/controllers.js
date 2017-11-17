@@ -9,8 +9,10 @@ angular.module('starter')
 	 $scope.lr = SDKService.getSDKContext(lroptions);
 	 $scope.lrapi = SDKService.getAPIContext();
      lroptions.facebookNative=false;
-     lroptions.googleNative = true;
+     lroptions.googleNative = false;
+     lroptions.vkNative=false;
      lroptions.googlewebid=""; // if you set google native login 
+     lroptions.vkAppId="";
      lroptions.callback = function(params) {
 
 	     //Handle the actions for: sociallogin, login, registration, and forgotpassword
@@ -85,11 +87,26 @@ angular.module('starter')
                         //Change password returns response which you can use to display messaging to your user.
                     case "changepassword":
                      alert(JSON.stringify(params.response));
-                     
-                        break;
+                     break;
+				    case "autoLogin":
+                     alert(JSON.stringify(params.response));
+					 // Email Prompt Auto Login returns response which you can use to display messaging to your user.
+                     break;
+                    case "noRegistrationPasswordLessLogin":
+                     alert(JSON.stringify(params.response));
+					  //No Registration Password Less Login returns response which you can use to display messaging to your user.
+                    break;	
+				    case "updateSecurityQuestion":
+                     alert(JSON.stringify(params.response));
+					  //Update Security Question returns response which you can use to display messaging to your user.
+                     break;
+				    case "resetPasswordBySecurityQuestion":
+                     alert(JSON.stringify(params.response));
+					 //Reset Password By Security Question returns response which you can use to display messaging to your user.
+                     break;
 
                     default:
-                        break;
+                    break;
 	     }
 	 };
 
@@ -97,8 +114,8 @@ angular.module('starter')
  
 
       $scope.onBackKeyDown = function() {
-       
-       navigator.app.backHistory();
+         history.go(-1);
+      // navigator.app.backHistory();
       }
 	 
 

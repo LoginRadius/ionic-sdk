@@ -18,7 +18,9 @@ this.getSDKContext = function(lroptions) {
                         $LR.login(url);
                     } else if (lroptions.googleNative && url.indexOf("google") !== -1) {
                         $LR.login(url);
-                    } else {
+                    } else if(lroptions.vkNative && url.indexOf("vkontakte")!== -1){
+                        $LR.login(url);
+                    }else {
                         return LRObject.util.openWindow(url);
                     }
 
@@ -304,10 +306,86 @@ this.getSDKContext = function(lroptions) {
                         params.action = "accountlinking";
                         lroptions.callback(params);
                         console.log(errors);
-                    }
+                    };
                     LRObject.init("linkAccount", la_options);
                     LRObject.init("unLinkAccount", la_options);
                 },
+                autoLogin: function() {
+                    var la_options = {};
+                    la_options.container = "autologin-container";
+                    la_options.onSuccess = function(response) {
+                        // On Success
+                        params.response = response;
+                        params.action = "autologin";
+                        lroptions.callback(params);
+                        console.log(response);
+                    };
+                    la_options.onError = function(errors) {
+                        // On Errors
+                        params.response = errors;
+                        params.action = "autologin";
+                        lroptions.callback(params);
+                        console.log(errors);
+                    };
+                    LRObject.init("autoLogin",la_options);
+                },noRegistrationPasswordLessLogin: function() {
+                   var password_less_options = {};
+                   password_less_options.container = "passwordLessLogin-container";
+                   password_less_options.onSuccess = function(response) {
+                        // On Success
+                        params.response = response;
+                        params.action = "noregistrationpasswordlesslogin";
+                        lroptions.callback(params);
+                        console.log(response);
+                    };
+                    password_less_options.onError = function(errors) {
+                        // On Errors
+                        params.response = errors;
+                        params.action = "noregistrationpasswordlesslogin";
+                        lroptions.callback(params);
+                        console.log(errors);
+                    };
+                    LRObject.init("noRegistrationPasswordLessLogin", password_less_options);
+                },updateSecurityQuestion: function() {
+                   var securityQ_options = {};
+                   securityQ_options.container = "securityQ-container";
+                   securityQ_options.onSuccess = function(response) {
+                        // On Success
+                        params.response = response;
+                        params.action = "updatesecurityquestion";
+                        lroptions.callback(params);
+                        console.log(response);
+                    };
+                    securityQ_options.onError = function(errors) {
+                        // On Errors
+                        params.response = errors;
+                        params.action = "updatesecurityquestion";
+                        lroptions.callback(params);
+                        console.log(errors);
+                    };
+                    LRObject.init("updateSecurityQuestion", securityQ_options );
+                },resetPasswordBySecurityQuestion: function() {
+                   var resetPasswordBySecQ_options = {};
+                   resetPasswordBySecQ_options.container = "resetPasswordBySecQ-container";
+                   resetPasswordBySecQ_options.onSuccess = function(response) {
+                        // On Success
+                        params.response = response;
+                        params.action = "resetpasswordbysecurityquestion";
+                        lroptions.callback(params);
+                        console.log(response);
+                    };
+                    resetPasswordBySecQ_options.onError = function(errors) {
+                        // On Errors
+                        params.response = errors;
+                        params.action = "resetpasswordbysecurityquestion";
+                        lroptions.callback(params);
+                        console.log(errors);
+                    };
+                    LRObject.init("resetPasswordBySecurityQuestion", resetPasswordBySecQ_options);
+                },
+
+
+
                 logout: function(options) {
                     $LR.logout(options);
                 }
@@ -328,14 +406,14 @@ this.getSDKContext = function(lroptions) {
             //Access tokens for native login are passed to the backend for parsing
             accessTokenPass: {
                 'FACEBOOK': '/api/v2/access_token/facebook?key={API_KEY}&fb_access_token={ACCESS_TOKEN}',
-                'GOOGLE': '/api/v2/access_token/googlejwt?key={API_KEY}&id_token={ACCESS_TOKEN}'
+                'GOOGLE': '/api/v2/access_token/googlejwt?key={API_KEY}&id_token={ACCESS_TOKEN}',
+                'VKONTAKTE': '/api/v2/access_token/vkontakte?key={API_KEY}&vk_access_token={ACCESS_TOKEN}'
             },
 
 
 
             login: function(url) {
 
-                win = window.open("http://", '_blank', 'location=no');
                 if (options.facebookNative && url.indexOf("facebook") !== -1) {
                     try {
                         facebookConnectPlugin.login($LR.options.permissions, this.util.nativeCallbackFacebookSuccess,
@@ -362,6 +440,21 @@ this.getSDKContext = function(lroptions) {
                             alert('error: ' + msg);
                             sessionStorage.removeItem("providername");
                         });
+                }else if (options.vkNative && url.indexOf("vkontakte") !== -1) {
+                    var vkAppId = "";
+
+                    if (options.vkAppId != null || options.vkAppId != "") {
+                        vkAppId = options.vkAppId;
+                    }
+                   SocialVk.init(vkAppId);
+
+				    try {
+						 SocialVk.login(['photos'],this.util.nativeCallbackVkontakteSuccess,this.util.nativeCallbackVkontakteFail);
+
+                    } catch (e) {
+                        alert(e);
+                    }
+
                 }
 
             },
@@ -450,7 +543,7 @@ this.getSDKContext = function(lroptions) {
 
                 },
                 nativeCallbackFacebookSuccess: function(userData) { // this fun use for  token exchange with loginradius
-
+                        alert(userData);
                     var url = "https://" + apiDomain + $LR.accessTokenPass['FACEBOOK'];
                     url = url.replace("{API_KEY}", LRObject.options.apiKey).replace(
                         "{ACCESS_TOKEN}", userData['authResponse']['accessToken']);
@@ -458,13 +551,23 @@ this.getSDKContext = function(lroptions) {
                 },
 
                 nativeCallbackFacebookFail: function(res) {
-
+                  alert(res);
                 },
 
+                nativeCallbackVkontakteFail: function(res) {
+                alert(res);
+                 },
+
+                 nativeCallbackVkontakteSuccess: function(userData) { // this fun use for  token exchange with loginradius
+                 tok = JSON.parse(userData);
+                  var url = "https://" + apiDomain + $LR.accessTokenPass['VKONTAKTE'];
+                  url = url.replace("{API_KEY}", LRObject.options.apiKey).replace( "{ACCESS_TOKEN}", tok.token);
+                 $LR.util.jsonpCall(url, $LR.util.LoginRadiusNativeCallback);
+                 },
+
                 LoginRadiusNativeCallback: function(callback) { //getting token and call "sociallogin" action
-                    win.close();
-                    sessionStorage.setItem("LRTokenKey", callback['access_token']);
-                    LRObject.loginRadiusHtml5PassToken(callback['access_token']);
+                sessionStorage.setItem("LRTokenKey", callback['access_token']);
+                LRObject.loginRadiusHtml5PassToken(callback['access_token']);
                     // win.close();
                     //  params.response= callback;
                     // params.action = "login";
@@ -479,14 +582,9 @@ this.getSDKContext = function(lroptions) {
                 nativeLogoutFacebookFailure: function(response) {
 
                 }
-
-
             }
 
         };
-
-
-
 
         // Social APIs
 

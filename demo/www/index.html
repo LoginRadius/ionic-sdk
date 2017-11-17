@@ -33,7 +33,7 @@
      <script src="js/app.js"></script>
 	 <script src="js/controllers.js"></script>
      <script src="js/sdkservices.js"></script>
-     <script src="https://auth.lrcontent.com/v2/LoginRadiusV2.js"></script>
+     <script src="https://auth.lrcontent.com/v2/js/LoginRadiusV2.js"></script>
  
  
  <script type="text/javascript">
@@ -45,7 +45,7 @@
         commonOptions.phoneLogin = false;
         commonOptions.sott ="<Get_Sott>";
         commonOptions.verificationUrl = "https://auth.lrcontent.com/mobile/verification/index.html";
-        commonOptions.callbackUrl = 'LoginRadiusIonicSdk.2.0.0/login';
+        commonOptions.callbackUrl = 'http://localhost:8100/#/login';
         commonOptions.isMobile = true;
         commonOptions.formValidationMessage = true;
         var LRObject = new LoginRadiusV2(commonOptions);
