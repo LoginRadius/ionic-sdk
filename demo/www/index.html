@@ -45,9 +45,13 @@
         commonOptions.phoneLogin = false;
         commonOptions.sott ="<Get_Sott>";
         commonOptions.verificationUrl = "https://auth.lrcontent.com/mobile/verification/index.html";
-        commonOptions.callbackUrl = 'http://localhost:8100/#/login';
+        commonOptions.callbackUrl = 'DemoApp://';
         commonOptions.isMobile = true;
         commonOptions.formValidationMessage = true;
+		/*commonOptions.smartLoginPingCount = <any number>; //default is 100 times
+        commonOptions.smartLoginPingInterval = <any number>; //default is 5 second
+        commonOptions.smartLoginEmailTemplate = <Email template>
+        commonOptions.smartLoginRedirectUrl = <Redirect Url> */
         var LRObject = new LoginRadiusV2(commonOptions);
 
 </script>
@@ -81,7 +85,7 @@
       </ion-content>
 
       <div class="bar bar-footer bar-light">
-   <h1 class="title" style="font-size: 10px;">Copyright © 2017 LoginRadius Inc.</h1>
+   <h1 class="title" style="font-size: 10px;">Copyright © 2018 LoginRadius Inc.</h1>
 </div>
     </ion-view>
   </script>

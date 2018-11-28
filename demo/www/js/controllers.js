@@ -88,13 +88,13 @@ angular.module('starter')
                     case "changepassword":
                      alert(JSON.stringify(params.response));
                      break;
-				    case "autoLogin":
+				    case "smartlogin":
                      alert(JSON.stringify(params.response));
-					 // Email Prompt Auto Login returns response which you can use to display messaging to your user.
+					 // Smart Login returns response which you can use to display messaging to your user.
                      break;
-                    case "noRegistrationPasswordLessLogin":
+                    case "onetouchlogin":
                      alert(JSON.stringify(params.response));
-					  //No Registration Password Less Login returns response which you can use to display messaging to your user.
+					  //One Touch Login returns response which you can use to display messaging to your user.
                     break;	
 				    case "updateSecurityQuestion":
                      alert(JSON.stringify(params.response));
@@ -110,9 +110,7 @@ angular.module('starter')
 	     }
 	 };
 
- 
- 
-
+     
       $scope.onBackKeyDown = function() {
          history.go(-1);
       // navigator.app.backHistory();

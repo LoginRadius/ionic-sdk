@@ -1,12 +1,26 @@
 > **LoginRadius Ionic SDK Change Log** provides information regarding what has changed, more specifically what changes, improvements and bug fix has been made to the SDK. For more details please refer to the [LoginRadius API Documention](http://apidocs.loginradius.com/docs/ionic)
 
+### Version 3.1.0
+Released on **November 28,  2018**
+
+##### Enhancements
+
+ - Added New Check Email,UserName and Phone Availability APIs.
+ - Added New Validate and InValidate AccessToken APIs.
+ - Added New Add and Remove Email APIs.
+ - Added New Update Phone API.
+ - Added New Resend Email Verification API.
+ 
+##### Breaking Changes
+For developers migrating from v3.0.0, there will be some breaking changes in terms of SDK implementation. In this version, we have updated endpoints and renamed "Auto Login" to "Smart Login", "No Registration/Simplified Registration" to "One touch Login" and "Instant Link Login" to "PasswordLess Login". Also, changed the methods of the above APIs accordingly.
+
 
 ### Version 3.0.0
 Released on **November 17,  2017**
 
 ##### Enhancements
 
-  - Added new VK native login for better native user experience.
+  - Added new vk native login for better native user experience.
   - Added new risk based authentication API.
   - Added new email prompt Auto login API.
   - Added new update security question API.
@@ -17,7 +31,7 @@ Released on **November 17,  2017**
 
 
 ### Version 2.0.1
-Released on **October 03,  2017**
+Released on **September 28,  2017**
 
 ##### Bug Fixes
    

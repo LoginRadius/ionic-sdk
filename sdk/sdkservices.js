@@ -1,3 +1,4 @@
+//SDK Version 3.1.0
 angular.module('starter')
 .service("SDKService", function() {
         var win;
@@ -310,42 +311,59 @@ this.getSDKContext = function(lroptions) {
                     LRObject.init("linkAccount", la_options);
                     LRObject.init("unLinkAccount", la_options);
                 },
-                autoLogin: function() {
+                smartLogin: function() {
                     var la_options = {};
-                    la_options.container = "autologin-container";
+                    la_options.container = "smartLogin-container";
                     la_options.onSuccess = function(response) {
                         // On Success
                         params.response = response;
-                        params.action = "autologin";
+                        params.action = "smartlogin";
                         lroptions.callback(params);
                         console.log(response);
                     };
                     la_options.onError = function(errors) {
                         // On Errors
                         params.response = errors;
-                        params.action = "autologin";
+                        params.action = "smartlogin";
                         lroptions.callback(params);
                         console.log(errors);
                     };
-                    LRObject.init("autoLogin",la_options);
-                },noRegistrationPasswordLessLogin: function() {
+                    LRObject.init("smartlogin",la_options);
+                },oneTouchLogin: function() {
                    var password_less_options = {};
-                   password_less_options.container = "passwordLessLogin-container";
+                   password_less_options.container = "onetouchLogin-container";
                    password_less_options.onSuccess = function(response) {
                         // On Success
                         params.response = response;
-                        params.action = "noregistrationpasswordlesslogin";
+                        params.action = "onetouchlogin";
                         lroptions.callback(params);
                         console.log(response);
                     };
                     password_less_options.onError = function(errors) {
                         // On Errors
                         params.response = errors;
-                        params.action = "noregistrationpasswordlesslogin";
+                        params.action = "onetouchlogin";
                         lroptions.callback(params);
                         console.log(errors);
                     };
-                    LRObject.init("noRegistrationPasswordLessLogin", password_less_options);
+                    LRObject.init("onetouchLogin", password_less_options);
+                },passwordlessLoginValidate: function() {
+                   var passwordless_options = {};
+                   passwordless_options.onSuccess = function(response) {
+                        // On Success
+                        params.response = response;
+                        params.action = "passwordlessloginvalidate";
+                        lroptions.callback(params);
+                        console.log(response);
+                    };
+                    passwordless_options.onError = function(errors) {
+                        // On Errors
+                        params.response = errors;
+                        params.action = "passwordlessloginvalidate";
+                        lroptions.callback(params);
+                        console.log(errors);
+                    };
+                    LRObject.init("passwordlessLoginValidate", passwordless_options);
                 },updateSecurityQuestion: function() {
                    var securityQ_options = {};
                    securityQ_options.container = "securityQ-container";
@@ -560,8 +578,8 @@ this.getSDKContext = function(lroptions) {
 
                  nativeCallbackVkontakteSuccess: function(userData) { // this fun use for  token exchange with loginradius
                  tok = JSON.parse(userData);
-                  var url = "https://" + apiDomain + $LR.accessTokenPass['VKONTAKTE'];
-                  url = url.replace("{API_KEY}", LRObject.options.apiKey).replace( "{ACCESS_TOKEN}", tok.token);
+                 var url = "https://" + apiDomain + $LR.accessTokenPass['VKONTAKTE'];
+                 url = url.replace("{API_KEY}", LRObject.options.apiKey).replace( "{ACCESS_TOKEN}", tok.token);
                  $LR.util.jsonpCall(url, $LR.util.LoginRadiusNativeCallback);
                  },
 
@@ -696,6 +714,133 @@ this.getSDKContext = function(lroptions) {
                 postMessage: function(to, subject, message, handle) {
                     util.jsonpCall("https://" + apiDomain + "/api/v2/message/js?access_token=" + getToken() + "&to=" + to + "&subject=" + subject + "&message=" + message, function(data) {
                         handle(data);
+                    });
+                },forgotPassword: function(email, handle) {
+                    LRObject.api.forgotPassword({
+                        email: email
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },resetPassword: function(resettoken,password,confirmpassword, handle) {
+                    LRObject.api.resetPassword({
+                        resettoken: resettoken,
+                        confirmpassword: confirmpassword,
+                        password: password
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },emailVerification: function(vtoken, handle) {
+                    LRObject.api.emailVerification({
+                        vtoken: vtoken
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },resendEmailVerification: function(email, handle) {
+                    LRObject.api.resendEmailVerification({
+                        email: email
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },addEmail: function(email,type, handle) {
+                    LRObject.api.addEmail({
+                        email: email,
+                        type: type
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },removeEmail: function(email, handle) {
+                    LRObject.api.removeEmail({
+                        email: email
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },changeUsername: function(username, handle) {
+                    LRObject.api.changeUsername({
+                        username: username
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },changePassword: function(oldpassword,newpassword,confirmpassword, handle) {
+                    LRObject.api.changePassword({
+                        oldpassword: oldpassword,
+                        newpassword: newpassword,
+                        confirmpassword: confirmpassword
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },checkPhoneNumberAvailability: function(phone, handle) {
+                    LRObject.api.checkPhoneNumberAvailability({
+                        phone: phone
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },checkEmailAvailability: function(email, handle) {
+                    LRObject.api.checkEmailAvailability({
+                        email: email
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },checkUserNameAvailability: function(username, handle) {
+                    LRObject.api.checkUserNameAvailability({
+                        username: username
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },resetPasswordByPhone: function(otp,phone,password, handle) {
+                    LRObject.api.resetPasswordByPhone({
+                        otp: otp,
+                        phone: phone,
+                        password: password
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },forgotPasswordbyPhone: function(phone, handle) {
+                    LRObject.api.forgotPasswordbyPhone({
+                        phone: phone
+                    }, function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },invalidateToken: function(access_token, handle) {
+                    LRObject.api.invalidateToken(access_token,
+                       
+                    function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
+                    });
+                },validateToken: function(access_token, handle) {
+                    LRObject.api.validateToken(access_token,
+                       
+                    function(response) {
+                        handle(response);
+                    }, function(errors) {
+                       handle(errors)
                     });
                 }
 
