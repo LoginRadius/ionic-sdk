@@ -1,11 +1,9 @@
 {
   "name": "demo",
-  "app_id": "",
-  "type": "ionic1",
   "integrations": {
-    "cordova": {},
-    "gulp": {}
+    "cordova": {}
   },
+  "type": "ionic1",
   "watchPatterns": [
     "scss/**/*",
     "www/**/*",

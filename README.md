@@ -10,13 +10,14 @@ LoginRadius helps businesses boost user engagement on their web/mobile platform,
 
 Please visit [here](http://www.loginradius.com/) for more information.
 
-######Before using demo project,you must install Ionic environment in your system Please visit [here](http://ionicframework.com/docs/guide/installation.html) for complete Ionic installation.
+######Before using demo project, you must install Ionic environment in your system Please visit [here](http://ionicframework.com/docs/guide/installation.html) for complete Ionic installation.
 
 #### There are two projects in the library:
 a. LoginApp-Demo - This is the demo application.    
 b. IonicSDK -This is the LoginRadius SDK
 
 ##### LoginApp-Demo
+
 1.Put the value according to your requirement in index.html
 ```JavaScript
   commonOptions.apiKey = "<your loginradius api key>";
